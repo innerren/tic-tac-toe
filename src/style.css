@@ -59,12 +59,30 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 	width: 100%;
+}
+
+#carusel{
+	margin-top: 2vw;
+	width: 60%;
+	height: 10vw;
+	
+	display: flex;
+	opacity: 1;
+	flex-direction: row;
+}
+
+.table{
+	width: 50vw;
+	height: 50vw;
 }
 
 .board{
 	display: flex;
+	position: absolute;
 	opacity: 0;
+	--durations: 2s;
 	justify-content: space-around;
 	align-content: space-around;
 	flex-wrap: wrap;
@@ -74,10 +92,11 @@
 	padding: 0;
 	background-color: black;
 	animation-name: showBoard;
-	animation-delay: 4s;
 	animation-timing-function: linear;
-	animation-duration: 2s;
+	animation-duration: var(--durations);
 	animation-fill-mode: forwards;
+	--bord: 1vw;
+
 }
 
 .el{
@@ -88,6 +107,7 @@
 	height: 30%;
 	background-color: white;
 	list-style-type: none;
+
 }
 
 
@@ -95,6 +115,7 @@
 .circle__half:before,
 .circle__half:after {
   box-sizing: border-box;
+  
 }
 
 .circle {
@@ -109,14 +130,15 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+
 }
 
 .circle_black:before{
-	border: 1vw solid black;
+	border: var(--bord) solid black;
 }
 
 .circle_white:before{
-	border: 1vw solid white;
+	border: var(--bord) solid white;	
 }
 
 .circle__half:before {
@@ -130,13 +152,15 @@
   transform: rotate(180deg);
   opacity: 1;
   animation-name: rotate-circle-half;
-  animation-duration: 2s;
+  animation-duration: var(--durations);
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+  	margin-left: 1px;
 }
 
 .circle__half--right {
   transform: scale(-1, -1);
+  margin-right: 1px;
 }
 
 .circle .circle__half--right:before {
@@ -180,8 +204,8 @@
 	height: 0%; 
 	width: 10%;
 	border-radius: 10vw 10vw 10vw 10vw;
-	animation-name: draw-cross;
-	animation-duration: 1s;
+	
+	animation-duration: var(--durations);
 	animation-timing-function: linear;
 	animation-fill-mode: forwards;
 }
@@ -197,7 +221,7 @@
 		position: absolute;
 		top: 100%;
 		left: 0px;
-		animation-delay: 1s;
+		animation-name: draw-cross-left;
 		transform-origin: 0% 0% ;
 		transform: rotate(228deg);
 }
@@ -205,12 +229,28 @@
 		position: absolute;
 		top: 0px;
 		left: 0px; 
+		animation-name: draw-cross-right;
 		transform-origin: 0% 0% ;
 		transform: rotate(318deg);
 }
 
-@keyframes draw-cross {
+@keyframes draw-cross-right {
 	0% {
+		height: 0%;
+	}
+	50% {
+		height: 138%;
+	}
+	100% {
+		height: 138%;
+	}
+}
+
+@keyframes draw-cross-left{
+	0% {
+		height: 0%;
+	}
+	50% {
 		height: 0%;
 	}
 	100% {
@@ -219,12 +259,9 @@
 }
 
 .winner{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100vw;
-	height: 100vh;
-	background-color: blue;
+	width: 100%;
+	height: 100%;
+	text-align: center;
 }
 
 .draw{
@@ -233,5 +270,4 @@
 	left: 0px;
 	width: 100vw;
 	height: 100vh;
-	background-color: grey;
 }
